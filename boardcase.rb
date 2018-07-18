@@ -6,14 +6,12 @@ class BoardCase
   attr_writer :value
 
   def initialize
-    @value = ' '
+    @value = ' ' #les cases sont initialisées sur un string vide
   end
 
   def value(value)
     if @value == ' '
-      # binding.pry
-      until 'xo'.include?(value.downcase.to_s)
-        # binding.pry
+      until 'xo'.include?(value.downcase.to_s) #la valeur de chaque case est " ", jusqu'à ce qu'on mette les caractères "xo"  
         print "Ne pas jouer autre chose que 'x' ou 'o' \n |> "
         value = gets.chomp.to_s.downcase
       end
