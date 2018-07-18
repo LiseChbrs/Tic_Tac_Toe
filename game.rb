@@ -24,19 +24,19 @@ class Game
     how_to
     @board.to_s
     puts "#{@player1.name} veuillez choisir votre case : \n |> "
-    @board.conversion(gets.chomp.to_i)
-    @board.grid(@board.abs, @board.ord, @player1.symb)
+    @board.conversion(gets.chomp.to_i) #conversion du fichier board : le chiffre que rentre l'utilisateur doit être converti et interprété dans la case correspondante
+    @board.grid(@board.abs, @board.ord, @player1.symb) #réactualise la grille 
   end
 
   def player2_play
     how_to
     @board.to_s
-    puts "#{@player2.name} veuillez choisir votre case : \n |> "
+    puts "#{@player2.name} veuillez choisir votre case : \n |> " #même chose pour le player2
     @board.conversion(gets.chomp.to_i)
     @board.grid(@board.abs, @board.ord, @player2.symb)
   end
 
-  def how_to
+  def how_to #permet d'afficher le numéro des cases à l'utilisateur
     puts '----------------------------------'
     puts '--   Type one of these figures: --'
     puts '----------------------------------'
@@ -48,28 +48,28 @@ class Game
     puts "\n"
   end
 
-  def anyone_play
-    i = 1
-    while i <= 9
+  def anyone_play #A qui le tour? 
+    i = 1 #tour 1
+    while i <= 9 #jusqu'au tour 9
       system('clear')
-      if i.odd?
-        player1_play
-        @board.align?
-        break if @board.won != 0
+      if i.odd? #si i est impair 
+        player1_play #le joueur1 joue 
+        @board.align? #lorsque l'élément X du joueur1 est aligné dans le board
+        break if @board.won != 0 #la boucle est rompu car joueur 1 a gagné
       else
         player2_play
         @board.align?
-        break if @board.won != 0
+        break if @board.won != 0 #même principe pour le joueur2
       end
       i += 1
     end
-    # binding.pry
+
     return @board.align?
   end
 
   def launch
     anyone_play
-    if @board.won != 0
+    if @board.won != 0 
       puts "le joueur #{@board.won} l'emporte !!!"
       restart_game
     else
